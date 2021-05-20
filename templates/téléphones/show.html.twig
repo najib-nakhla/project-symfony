@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ téléphone.nom }}{% endblock %}
+{% block body %}
+<h1>{{ téléphone.nom }}</h1>
+<p>{{ téléphone.prix }}</p>
+<p>{{ téléphone.caracteristique }}</p>
+<p>{{ téléphone.marque.nom }}</p>
+
+<hr>
+<a href="/">Retour</a>
+{% endblock %}

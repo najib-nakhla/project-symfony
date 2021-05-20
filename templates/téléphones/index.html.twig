@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des téléphones{% endblock %}
+{% block body %}
+{{ form_start(form) }}
+<div class="form-row align-items-end" >
+<div class="col">
+ {{ form_row(form.nom) }}
+</div>
+ <div class="col">
+ <div class="form-group">
+ <button type="submit" class="btn btn-success">Rechercher</button>
+ </div>
+</div>
+</div>
+{{ form_end(form) }}
+{% if téléphones %}
+ <table id="téléphones" class="table table-striped">
+ <thead>
+ <tr>
+ <th>Nom</th>
+ <th>Prix</th>
+ <th>Caractéristique </th>
+ <th>Marque </th>
+
+ <th>Actions</th>
+
+ </tr>
+ </thead>
+ <tbody>
+ {% for téléphone in téléphones %}
+ <tr>
+ <td>{{ téléphone.nom }}</td>
+ <td>{{ téléphone.prix }}</td>
+ <td>{{ téléphone.caracteristique }}</td>
+ <td>{{ téléphone.marque.nom }}</td>
+
+
+ <td>
+<a href="/phone/{{ téléphone.id }}" class="btn btn-dark">Détails</a>
+ {% if is_granted('ROLE_EDITOR') %} 
+<a href="/phone/edit/{{ téléphone.id }}" class="btn btn-dark">Modifier</a>
+<a href="/phone/delete/{{ téléphone.id }}" class="btn btn-danger"onclick="return confirm('Etesvous sûr de supprimer ce téléphone?');">Supprimer</a>
+{% endif %} 
+ </td>
+ </tr>
+ {% endfor %}
+ </tbody>
+ </table>
+ {% else %}
+ <p>Aucun téléphone</p>
+ {% endif %}
+{% endblock %}
